@@ -55,6 +55,46 @@ xhr.send();
 
 /* ----------------------------------------------------------Задание 4------------------------------------------------------------------------- */
 
+const xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
+
+xhr.onload = function () {
+  if (xhr.status === 200) {
+    const posts = JSON.parse(xhr.responseText);
+
+    const container = document.getElementById('posts-container');
+    const list = document.createElement('ul');
+
+    posts.forEach(post => {
+      const postItem = document.createElement('li');
+
+      const title = document.createElement('h3');
+      title.textContent = post.title;
+
+      const body = document.createElement('p');
+      body.textContent = post.body;
+
+      const userId = document.createElement('small');
+      userId.textContent = `ID пользователя: ${post.userId}`;
+
+      postItem.appendChild(title);
+      postItem.appendChild(body);
+      postItem.appendChild(userId);
+
+      list.appendChild(postItem);
+    });
+
+    container.appendChild(list);
+  } else {
+    console.error('Ошибка загрузки. Статус:', xhr.status);
+  }
+};
+
+xhr.onerror = function () {
+  console.error('Ошибка сети');
+};
+
+xhr.send();
 
 /* ----------------------------------------------------------Задание 5------------------------------------------------------------------------- */
 
