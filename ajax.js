@@ -23,153 +23,145 @@ xhr.onerror = function() {
 xhr.send(); //Отправка запроса
 
 /* ----------------------------------------------------------Задание 3------------------------------------------------------------------------- */
+const postContainer = document.getElementById("posts-container");
 
 const xhr = new XMLHttpRequest();
 
-xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
+xhr.open("GET", "https://jsonplaceholder.typicode.com/posts")
 
-xhr.onload = function () {
-  if (xhr.status === 200) {
-    const posts = JSON.parse(xhr.responseText);
+xhr.onload = function() {
+    const data = JSON.parse(xhr.responseText);
+    data.forEach(post => {
+        const li = document.createElement("li");
+        li.textContent = post.title;
 
-    const list = document.createElement('ul');
+        postContainer.appendChild(li)
+    })
+}
 
-    posts.forEach(post => {
-      const li = document.createElement('li');
-      li.textContent = post.title;
-      list.appendChild(li);
-    });
+xhr.onerror = function() {
+    console.log('errorrrr')
+}
 
-    document.body.appendChild(list);
-  } else {
-    console.error('Ошибка загрузки. Статус:', xhr.status);
-  }
-};
+xhr.send()
 
-xhr.onerror = function () {
-  console.error('Ошибка сети при загрузке постов');
-};
+// /* ----------------------------------------------------------Задание 4------------------------------------------------------------------------- */
 
-xhr.send();
+// const xhr = new XMLHttpRequest();
+// xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
 
+// xhr.onload = function () {
+//   if (xhr.status === 200) {
+//     const posts = JSON.parse(xhr.responseText);
 
-/* ----------------------------------------------------------Задание 4------------------------------------------------------------------------- */
+//     const container = document.getElementById('posts-container');
+//     const list = document.createElement('ul');
 
-const xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
+//     posts.forEach(post => {
+//       const postItem = document.createElement('li');
 
-xhr.onload = function () {
-  if (xhr.status === 200) {
-    const posts = JSON.parse(xhr.responseText);
+//       const title = document.createElement('h3');
+//       title.textContent = post.title;
 
-    const container = document.getElementById('posts-container');
-    const list = document.createElement('ul');
+//       const body = document.createElement('p');
+//       body.textContent = post.body;
 
-    posts.forEach(post => {
-      const postItem = document.createElement('li');
+//       const userId = document.createElement('small');
+//       userId.textContent = `ID пользователя: ${post.userId}`;
 
-      const title = document.createElement('h3');
-      title.textContent = post.title;
+//       postItem.appendChild(title);
+//       postItem.appendChild(body);
+//       postItem.appendChild(userId);
 
-      const body = document.createElement('p');
-      body.textContent = post.body;
+//       list.appendChild(postItem);
+//     });
 
-      const userId = document.createElement('small');
-      userId.textContent = `ID пользователя: ${post.userId}`;
+//     container.appendChild(list);
+//   } else {
+//     console.error('Ошибка загрузки. Статус:', xhr.status);
+//   }
+// };
 
-      postItem.appendChild(title);
-      postItem.appendChild(body);
-      postItem.appendChild(userId);
+// xhr.onerror = function () {
+//   console.error('Ошибка сети');
+// };
 
-      list.appendChild(postItem);
-    });
+// xhr.send();
 
-    container.appendChild(list);
-  } else {
-    console.error('Ошибка загрузки. Статус:', xhr.status);
-  }
-};
+// /* ----------------------------------------------------------Задание 5------------------------------------------------------------------------- */
 
-xhr.onerror = function () {
-  console.error('Ошибка сети');
-};
+// const xhr = new XMLHttpRequest();
 
-xhr.send();
+// xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
 
-/* ----------------------------------------------------------Задание 5------------------------------------------------------------------------- */
+// xhr.onload = function () {
+//   const errorDiv = document.getElementById('error');
+//   const container = document.getElementById('posts-container');
 
-const xhr = new XMLHttpRequest();
+//   if (xhr.status === 200) {
+//     const posts = JSON.parse(xhr.responseText);
 
-xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
+//     const list = document.createElement('ul');
 
-xhr.onload = function () {
-  const errorDiv = document.getElementById('error');
-  const container = document.getElementById('posts-container');
+//     posts.forEach(post => {
+//       const postItem = document.createElement('li');
+//       postItem.textContent = post.title;
+//       list.appendChild(postItem);
+//     });
 
-  if (xhr.status === 200) {
-    const posts = JSON.parse(xhr.responseText);
+//     container.appendChild(list);
 
-    const list = document.createElement('ul');
+//   } else {
+//     errorDiv.textContent = `Ошибка загрузки данных. Код: ${xhr.status}`;
+//     errorDiv.style.color = 'red';
+//   }
+// };
 
-    posts.forEach(post => {
-      const postItem = document.createElement('li');
-      postItem.textContent = post.title;
-      list.appendChild(postItem);
-    });
+// xhr.onerror = function () {
+//   const errorDiv = document.getElementById('error');
+//   errorDiv.textContent = "Ошибка: не удалось подключиться к серверу.";
+//   errorDiv.style.color = 'red';
+// };
 
-    container.appendChild(list);
+// xhr.send();
 
-  } else {
-    errorDiv.textContent = `Ошибка загрузки данных. Код: ${xhr.status}`;
-    errorDiv.style.color = 'red';
-  }
-};
+// /* ----------------------------------------------------------Задание 6------------------------------------------------------------------------- */
 
-xhr.onerror = function () {
-  const errorDiv = document.getElementById('error');
-  errorDiv.textContent = "Ошибка: не удалось подключиться к серверу.";
-  errorDiv.style.color = 'red';
-};
+// const xhr = new XMLHttpRequest();
+// xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
 
-xhr.send();
+// const loadingDiv = document.getElementById('loading');
+// const errorDiv = document.getElementById('error');
+// const container = document.getElementById('posts-container');
 
-/* ----------------------------------------------------------Задание 6------------------------------------------------------------------------- */
+// loadingDiv.style.display = 'block';
 
-const xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
+// xhr.onload = function () {
+//   loadingDiv.style.display = 'none';
 
-const loadingDiv = document.getElementById('loading');
-const errorDiv = document.getElementById('error');
-const container = document.getElementById('posts-container');
+//   if (xhr.status === 200) {
+//     const posts = JSON.parse(xhr.responseText);
 
-loadingDiv.style.display = 'block';
+//     const list = document.createElement('ul');
 
-xhr.onload = function () {
-  loadingDiv.style.display = 'none';
+//     posts.forEach(post => {
+//       const postItem = document.createElement('li');
+//       postItem.textContent = post.title;
+//       list.appendChild(postItem);
+//     });
 
-  if (xhr.status === 200) {
-    const posts = JSON.parse(xhr.responseText);
+//     container.appendChild(list);
+//   } else {
+//     errorDiv.textContent = `Ошибка загрузки данных. Код: ${xhr.status}`;
+//     errorDiv.style.color = 'red';
+//   }
+// };
 
-    const list = document.createElement('ul');
+// xhr.onerror = function () {
+//   loadingDiv.style.display = 'none';
 
-    posts.forEach(post => {
-      const postItem = document.createElement('li');
-      postItem.textContent = post.title;
-      list.appendChild(postItem);
-    });
+//   errorDiv.textContent = "Ошибка: не удалось подключиться к серверу.";
+//   errorDiv.style.color = 'red';
+// };
 
-    container.appendChild(list);
-  } else {
-    errorDiv.textContent = `Ошибка загрузки данных. Код: ${xhr.status}`;
-    errorDiv.style.color = 'red';
-  }
-};
-
-xhr.onerror = function () {
-  loadingDiv.style.display = 'none';
-
-  errorDiv.textContent = "Ошибка: не удалось подключиться к серверу.";
-  errorDiv.style.color = 'red';
-};
-
-xhr.send();
+// xhr.send();
