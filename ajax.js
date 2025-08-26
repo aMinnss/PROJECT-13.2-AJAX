@@ -27,7 +27,7 @@ const postContainer = document.getElementById("posts-container");
 
 const xhr = new XMLHttpRequest();
 
-xhr.open("GET", "https://jsonplaceholder.typicode.com/posts")
+xhr.open("GET", "https://jsonplaceholder.typicode.com/posts", true)
 
 xhr.onload = function() {
     const data = JSON.parse(xhr.responseText);
@@ -47,46 +47,41 @@ xhr.send()
 
 // /* ----------------------------------------------------------Задание 4------------------------------------------------------------------------- */
 
-// const xhr = new XMLHttpRequest();
-// xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
+const textIdContainer = document.getElementById("post-container");
 
-// xhr.onload = function () {
-//   if (xhr.status === 200) {
-//     const posts = JSON.parse(xhr.responseText);
+const xhr = new XMLHttpRequest();
 
-//     const container = document.getElementById('posts-container');
-//     const list = document.createElement('ul');
+xhr.open("GET", "https://jsonplaceholder.typicode.com/posts", true)
 
-//     posts.forEach(post => {
-//       const postItem = document.createElement('li');
+xhr.onload = function() {
+    const data = JSON.parse(xhr.responseText);
+    data.forEach(post => {
 
-//       const title = document.createElement('h3');
-//       title.textContent = post.title;
+        const li = document.createElement("li");
 
-//       const body = document.createElement('p');
-//       body.textContent = post.body;
+        const title = document.createElement("h3");
+        title.textContent = post.title;
 
-//       const userId = document.createElement('small');
-//       userId.textContent = `ID пользователя: ${post.userId}`;
+        const body = document.createElement("p");
+        body.textContent = post.body;
 
-//       postItem.appendChild(title);
-//       postItem.appendChild(body);
-//       postItem.appendChild(userId);
+        const userId = document.createElement("small");
+        userId.textContent = post.userId;
 
-//       list.appendChild(postItem);
-//     });
+        li.appendChild(title);
+        li.appendChild(body);        
+        li.appendChild(userId);
 
-//     container.appendChild(list);
-//   } else {
-//     console.error('Ошибка загрузки. Статус:', xhr.status);
-//   }
-// };
+        textIdContainer.appendChild(li)
+    })
+}
 
-// xhr.onerror = function () {
-//   console.error('Ошибка сети');
-// };
+xhr.onerror = function() {
+    console.error('error_error')
+}
 
-// xhr.send();
+xhr.send()
+
 
 // /* ----------------------------------------------------------Задание 5------------------------------------------------------------------------- */
 
