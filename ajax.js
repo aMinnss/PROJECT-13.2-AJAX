@@ -85,40 +85,40 @@ xhr.send()
 
 // /* ----------------------------------------------------------Задание 5------------------------------------------------------------------------- */
 
-// const xhr = new XMLHttpRequest();
+const xhr = new XMLHttpRequest();
 
-// xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
+xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
 
-// xhr.onload = function () {
-//   const errorDiv = document.getElementById('error');
-//   const container = document.getElementById('posts-container');
+xhr.onload = function () {
+  const errorDiv = document.getElementById('error');
+  const container = document.getElementById('posts-container');
 
-//   if (xhr.status === 200) {
-//     const posts = JSON.parse(xhr.responseText);
+  if (xhr.status === 200) {
+    const posts = JSON.parse(xhr.responseText);
 
-//     const list = document.createElement('ul');
+    const list = document.createElement('ul');
 
-//     posts.forEach(post => {
-//       const postItem = document.createElement('li');
-//       postItem.textContent = post.title;
-//       list.appendChild(postItem);
-//     });
+    posts.forEach(post => {
+      const postItem = document.createElement('li');
+      postItem.textContent = post.title;
+      list.appendChild(postItem);
+    });
 
-//     container.appendChild(list);
+    container.appendChild(list);
 
-//   } else {
-//     errorDiv.textContent = `Ошибка загрузки данных. Код: ${xhr.status}`;
-//     errorDiv.style.color = 'red';
-//   }
-// };
+  } else {
+    errorDiv.textContent = `Ошибка загрузки данных. Код: ${xhr.status}`;
+    errorDiv.style.color = 'red';
+  }
+};
 
-// xhr.onerror = function () {
-//   const errorDiv = document.getElementById('error');
-//   errorDiv.textContent = "Ошибка: не удалось подключиться к серверу.";
-//   errorDiv.style.color = 'red';
-// };
+xhr.onerror = function () {
+  const errorDiv = document.getElementById('error');
+  errorDiv.textContent = "Ошибка: не удалось подключиться к серверу.";
+  errorDiv.style.color = 'red';
+};
 
-// xhr.send();
+xhr.send();
 
 // /* ----------------------------------------------------------Задание 6------------------------------------------------------------------------- */
 
