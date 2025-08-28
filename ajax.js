@@ -122,41 +122,41 @@ xhr.send();
 
 // /* ----------------------------------------------------------Задание 6------------------------------------------------------------------------- */
 
-// const xhr = new XMLHttpRequest();
-// xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
+const xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
 
-// const loadingDiv = document.getElementById('loading');
-// const errorDiv = document.getElementById('error');
-// const container = document.getElementById('posts-container');
+const loadingDiv = document.getElementById('loading');
+const errorDiv = document.getElementById('error');
+const container = document.getElementById('posts-container');
 
-// loadingDiv.style.display = 'block';
+loadingDiv.style.display = 'block';
 
-// xhr.onload = function () {
-//   loadingDiv.style.display = 'none';
+xhr.onload = function () {
+  loadingDiv.style.display = 'none';
 
-//   if (xhr.status === 200) {
-//     const posts = JSON.parse(xhr.responseText);
+  if (xhr.status === 200) {
+    const posts = JSON.parse(xhr.responseText);
 
-//     const list = document.createElement('ul');
+    const list = document.createElement('ul');
 
-//     posts.forEach(post => {
-//       const postItem = document.createElement('li');
-//       postItem.textContent = post.title;
-//       list.appendChild(postItem);
-//     });
+    posts.forEach(post => {
+      const postItem = document.createElement('li');
+      postItem.textContent = post.title;
+      list.appendChild(postItem);
+    });
 
-//     container.appendChild(list);
-//   } else {
-//     errorDiv.textContent = `Ошибка загрузки данных. Код: ${xhr.status}`;
-//     errorDiv.style.color = 'red';
-//   }
-// };
+    container.appendChild(list);
+  } else {
+    errorDiv.textContent = `Ошибка загрузки данных. Код: ${xhr.status}`;
+    errorDiv.style.color = 'red';
+  }
+};
 
-// xhr.onerror = function () {
-//   loadingDiv.style.display = 'none';
+xhr.onerror = function () {
+  loadingDiv.style.display = 'none';
 
-//   errorDiv.textContent = "Ошибка: не удалось подключиться к серверу.";
-//   errorDiv.style.color = 'red';
-// };
+  errorDiv.textContent = "Ошибка: не удалось подключиться к серверу.";
+  errorDiv.style.color = 'red';
+};
 
-// xhr.send();
+xhr.send();
